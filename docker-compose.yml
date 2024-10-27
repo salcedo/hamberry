@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  desktop:
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      - "USER=${HAMBERRY_USER}"
+      - "PASSWORD=${HAMBERRY_PASSWORD}"
+    devices:
+      - /dev/snd
+      - /dev/ttyUSB0
+    hostname: hamberry
+    ports:
+      - "443:443"
+    volumes:
+      - "home:/home/${HAMBERRY_USER}"
+
+volumes:
+  home:
